@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <!--添加展示名称-->
+    <display-name>Blog</display-name>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
+    </context-param>
+
+    <!-- SpringMVC 监听
+    ApplicationContext.xml  是spring 全局配置文件，用来控制spring 特性的
+　　dispatcher-servlet.xml 是spring mvc里面的，控制器、拦截uri转发view
+　　使用applicationContext.xml文件时是需要在web.xml中添加listener的：-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- SpringMVC 配置-->
+    <servlet>
+        <!--{servlet-name}-servlet即为项目中应有的配置文件的名称-->
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--自定义springmvc的配置文件名称和路劲-->
+        <!-- 不设置contextConfigLocation，SpringMVC 会在WEB-INF文件夹下查找<servlet-name/>-servlet.xml，设置
+            contextConfigLocation，可自定义SpringMVC-servlet.xml的位置 -->
+        <!--<init-param>-->
+            <!--<param-name>contextConfigLocation</param-name>-->
+            <!--<param-value>classpath:src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml</param-value>-->
+        <!--</init-param>-->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!-- SpringMVC 请求后缀
+    指定了springmvc映射的目录-->
+    <servlet-mapping>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <!--url-pattern的值改为/，用于拦截请求，这样表示拦截所有请求，并交由springmvc的后台控制器来处理。此项必须配置-->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!--首页文件列表-->
+    <welcome-file-list>
+        <welcome-file>src/main/webapp/WEB-INF/pages/hello.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>

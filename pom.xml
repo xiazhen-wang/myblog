@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- 模型版本,maven2.0必须是这样写，现在是maven2唯一支持的版本 -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 基本设置 -->
+
+    <!-- 公司或者组织的唯一标志，并且配置时生成的路径也是由此生成，
+    如com.winner.trade，maven会将该项目打成的jar包放本地路径：/com/winner/trade -->
+    <groupId>com.demo</groupId>
+
+    <!-- 本项目的唯一ID，一个groupId下面可能多个项目，就是靠artifactId来区分的 -->
+    <artifactId>Blog</artifactId>
+
+    <!--本项目目前所处的版本号-->
+    <version>1.0-SNAPSHOT</version>
+
+    <!--打包的机制：pom,jar,maven-plugin,ejb,war,ear,rar,par,默认为jar.
+    这里设置为war,因为maven默认的打包方式不会放到/WEB-INF/lib里面，但是Tomcat启动的时候会在/WEB-INF/lib里面寻找类，如果不使用war打包方式，会不停的抛出classNotFound异常-->
+    <packaging>war</packaging>
+
+    <!-- 为pom定义一些常量，在pom中的其它地方可以直接引用 使用方式 如下 ：${file.encoding} -->
+    <properties>
+        <file.encoding>UTF-8</file.encoding>
+        <java.source.version>1.8</java.source.version>
+        <java.target.version>1.8</java.target.version>
+        <spring.version>4.2.5.RELEASE</spring.version>
+    </properties>
+
+    <!--定义本项目的依赖关系-->
+    <dependencies>
+        <!--每个dependency都对应这一个jar包-->
+        <!--一般情况下，maven是通过groupId、artifactId、version这三个元素值（俗称坐标）来检索该构件，然后引入你的工程。
+        如果别人想引用你现在开发的这个项目（项目已开发完毕并发布到了远程仓库）,
+        就需要在他的pom文件中新建一个dependency节点，将本项目的groupId、artifactId、version写入，maven就会把你上传的jar包下载到他的本地 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+    </dependencies>
+
+
+
+    
+</project>
